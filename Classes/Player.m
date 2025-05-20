@@ -1,9 +1,8 @@
-classdef Player
-    %PLAYER Summary of this class goes here
-    %   Detailed explanation goes here
-    
+classdef Player    
     properties
-        Property1
+        Score
+        IsPlaying
+        Winner
     end
     
     methods

@@ -1,7 +1,7 @@
-function [outputArg1,outputArg2] = Roll(inputArg1,inputArg2)
-%ROLL Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function rolled = Roll()
+    % Will roll up to 4-8 times (randomized), and returns a value between 1
+    % and 6.
+
+    rolled = ceil(randi([1, 6]));
 end
 

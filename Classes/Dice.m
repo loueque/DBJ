@@ -1,22 +1,22 @@
 classdef Dice
-    %DICE Summary of this class goes here
-    %   Detailed explanation goes here
-    
+    % Dice class, rolls a random dice based off 21, goes through
+    % permutaitonal loops from 1-6, with only one function rolling and
+    % setting RollValue to that, and fetching the RollValue using GetRoll
+
     properties
-        Property1
+        RollValue
+        HasRolled
     end
     
     methods
-        function obj = Dice(inputArg1,inputArg2)
+        function obj = Dice()
             %DICE Construct an instance of this class
             %   Detailed explanation goes here
-            obj.Property1 = inputArg1 + inputArg2;
+            obj.RollValue = 0;
         end
-        
-        function outputArg = method1(obj,inputArg)
-            %METHOD1 Summary of this method goes here
-            %   Detailed explanation goes here
-            outputArg = obj.Property1 + inputArg;
+
+        function rollValue = GetRolledValue(obj)
+            rollValue = obj.RollValue;
         end
     end
 end
