@@ -9,4 +9,8 @@ end
 disp("Hi")
 disp("CAN YOU SEE THIS")
 
+function new = Diff(inputs)
+    new = 2 .* inputs;
+end
+
 disp(Dice.GetRolledValue())
