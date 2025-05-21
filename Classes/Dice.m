@@ -5,6 +5,7 @@ classdef Dice
 
     properties
         RollValue
+        Score
         HasRolled
     end
     
@@ -13,6 +14,7 @@ classdef Dice
             %DICE Construct an instance of this class
             %   Detailed explanation goes here
             obj.RollValue = 0;
+            obj.Score = 0;
         end
 
         function rollValue = GetRolledValue(obj)
