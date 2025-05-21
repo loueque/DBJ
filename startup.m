@@ -6,4 +6,6 @@ for i = 1:10
     Dice.RollValue = Roll();
 end
 
+disp("Hi")
+
 disp(Dice.GetRolledValue())
