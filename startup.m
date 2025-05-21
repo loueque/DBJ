@@ -7,5 +7,6 @@ for i = 1:10
 end
 
 disp("Hi")
+disp("CAN YOU SEE THIS")
 
 disp(Dice.GetRolledValue())
