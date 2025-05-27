@@ -1,4 +1,4 @@
-classdef Player    
+classdef Player < handle    
     properties
         Name
         Score
@@ -8,11 +8,9 @@ classdef Player
     
     methods
         function player = Player(name)
-            %PLAYER Construct an instance of this class
-            %   Detailed explanation goes here
             player.Score = 0;
             player.Name = name;
-            player.IsPlaying = true;
+            player.IsPlaying = false;
             player.IsDoneRolling = false;
         end
         
@@ -20,11 +18,11 @@ classdef Player
             playerScore = player.Score;
         end
 
-        function UpdateScore(player, f)
-            player.Score = player.Score + f
+        function player = UpdateScore(player, f)
+            player.Score = player.Score + f;
         end
 
-        function FinishTheRoll(player)
+        function player = FinishTheRoll(player)
             player.IsDoneRolling = true;
         end
     end

@@ -1,4 +1,4 @@
-classdef Dice
+classdef Dice < handle
     % Dice class, rolls a random dice based off 21, goes through
     % permutaitonal loops from 1-6, with only one function rolling and
     % setting RollValue to that, and fetching the RollValue using GetRoll
