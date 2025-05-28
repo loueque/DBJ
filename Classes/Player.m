@@ -1,21 +1,29 @@
-classdef Player    
+classdef Player < handle    
     properties
+        Name
         Score
         IsPlaying
-        Winner
+        IsDoneRolling
     end
     
     methods
-        function obj = Player(inputArg1,inputArg2)
-            %PLAYER Construct an instance of this class
-            %   Detailed explanation goes here
-            obj.Property1 = inputArg1 + inputArg2;
+        function player = Player(name)
+            player.Score = 0;
+            player.Name = name;
+            player.IsPlaying = false;
+            player.IsDoneRolling = false;
         end
         
-        function outputArg = method1(obj,inputArg)
-            %METHOD1 Summary of this method goes here
-            %   Detailed explanation goes here
-            outputArg = obj.Property1 + inputArg;
+        function playerScore = GetPlayerScore(player)
+            playerScore = player.Score;
+        end
+
+        function player = UpdateScore(player, f)
+            player.Score = player.Score + f;
+        end
+
+        function player = FinishTheRoll(player)
+            player.IsDoneRolling = true;
         end
     end
 end
