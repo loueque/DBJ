@@ -4,6 +4,6 @@ function allTurnsDone = CheckPlayersDoneTurn(players)
         playerStatus(x) = players(x).IsDoneRolling;
     end
 
-    allTurnsDone = all(playerStatus)
+    allTurnsDone = all(playerStatus);
 end
 
