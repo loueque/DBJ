@@ -8,10 +8,12 @@ classdef Player < handle
     
     methods
         function player = Player(name)
-            player.Score = 0;
-            player.Name = name;
-            player.IsPlaying = false;
-            player.IsDoneRolling = false;
+            if nargin > 0
+                player.Score = 0;
+                player.Name = name;
+                player.IsPlaying = false;
+                player.IsDoneRolling = false;
+            end
         end
         
         function playerScore = GetPlayerScore(player)

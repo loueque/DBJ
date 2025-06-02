@@ -13,6 +13,19 @@ fprintf('The game will be played to %s points!\n', points_to_win);
 
 % --- Local function below ---
 
+playerNames = {};
+for i = 1:num
+    prompt = sprintf('Player %d, enter name: ', i);
+    playerNames{end+1} = input(prompt, "s");
+end
+
+players(1, length(playerNames)) = Player();
+
+for i = 1:length(playerNames)
+    players(i) = Player(playerNames{i});
+    disp(players(i))
+end
+
 function players = get_players(num)
     for i = 1:num
         prompt = sprintf('Player %d, enter name: ', i);
