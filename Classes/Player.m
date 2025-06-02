@@ -2,6 +2,8 @@ classdef Player < handle
     properties
         Name
         Score
+        FinalScore
+        Points
         IsPlaying
         IsDoneRolling
     end
@@ -11,6 +13,7 @@ classdef Player < handle
             if nargin > 0
                 player.Score = 0;
                 player.Name = name;
+                player.Points = 0;
                 player.IsPlaying = false;
                 player.IsDoneRolling = false;
             end
