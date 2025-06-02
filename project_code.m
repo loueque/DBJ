@@ -1,7 +1,7 @@
 clear;
 
 % Ask how many players will play
-num = input('How many players will play? ');
+num = input('How many players will play? (1 or 2)');
 
 % Call function to get players
 players = get_players(num);
@@ -112,153 +112,70 @@ elseif secondRoll == 11
 end
 computer.rollAmount = computer.rollAmount + secondRoll;  % update silently
 
-% --- Third roll for players ---
-fprintf("Hitting begins now.\n");
-pause(.5);
+% Loop through all players
 for i = 1:num
-    promptHit = sprintf('%s, your current total is %d, would you like to hit? Y/N.\n', players(i).name, players(i).rollAmount);
-    choiceOne = upper(input (promptHit, 's'));
-    validChoices = ["YES", "YE", "Y", "NO", "N"];
-    while ismember(choiceOne, validChoices) == 0
-        promptHit = sprintf('%s, your current total is %d, would you like to hit? Y/N.\n', players(i).name, players(i).rollAmount);
-        choiceOne = upper(input (promptHit, 's'));
-    end
+    while true
+        % Show current total
+        fprintf('%s, your current total is %d.\n', players(i).name, players(i).rollAmount);
 
-    
-    if choiceOne == "Y" || choiceOne == "YE" || choiceOne == "YES"
-           prompt = sprintf('%s, press Enter to roll the dice again...', players(i).name);
-           input(prompt, 's');
-            
-            roll = randi([2,14]);  % roll dice from 1 to 14
-            if ismember(roll, [10,12,13,14])
-                roll = 10;
+        % Ask if they want to roll again
+        choice = input('Do you want to roll again? (y/n): ', 's');
+        
+        if strcmpi(choice, 'n')
+            fprintf('%s has chosen to stand with %d as their total sum.\n', players(i).name, players(i).rollAmount);
+            players(i).doneBetting = 1;  % You can use this flag later
+            break;
+        end
+
+        % Roll the dice
+        roll = randi([2,14]);
+        if ismember(roll, [10,12,13,14])
+            roll = 10;
+        elseif roll == 11
+            isValid = false;
+            fprintf('%s, choose if you want your roll to be 1 or 11.\n', players(i).name);
+            while ~isValid
+                roll = input('Enter your choice (1 or 11): ');
+                if ismember(roll, [1, 11])
+                    isValid = true;
+                else
+                    fprintf('Please enter a valid number (1 or 11)\n');
+                end
             end
-            
-            fprintf('%s rolled a %d!\n', players(i).name, roll);
-           
-              
-                if roll == 11
-                  isValid = false;
-                  fprintf('%s, choose if you want your roll to be 1 or 11.\n', players(i).name)
-                   while isValid == false
-                        roll = input('Enter your choice (1 or 11): ');
-                        if ismember(roll, [1, 11])
-                          fprintf('Your roll is %d\n', roll)
-                          isValid = true;
-                        else
-                          fprintf('Please enter a valid number (1 or 11) ')
-                        end
-                   end
-                end
-            players(i).rollAmount = players(i).rollAmount + roll;
-            
-            fprintf('%s, your new total sum is %d.\n', players(i).name, players(i).rollAmount);
-    elseif choiceOne == "N" || choiceOne == "NO"
-        players(i).scoreFinal = players(i).rollAmount;
-        players(i).doneBetting = 1;        
-    end
-end
-    
-% --- Fourth roll for players ---
-pause(0.5);
-fprintf("Second round of hitting.\n");
-pause(.5);
-for i = 1:num
-    if players(i).doneBetting == 0;
-
-        promptHit = sprintf('%s, your current total is %d, would you like to hit? Y/N.\n', players(i).name, players(i).rollAmount);
-        choiceOne = upper(input (promptHit, 's'));
-        validChoices = ["YES", "YE", "Y", "NO", "N"];
-        while ismember(choiceOne, validChoices) == 0
-            promptHit = sprintf('%s, your current total is %d, would you like to hit? Y/N.\n', players(i).name, players(i).rollAmount);
-            choiceOne = upper(input (promptHit, 's'));
         end
-    
         
-        if choiceOne == "Y" || choiceOne == "YE" || choiceOne == "YES"
-               prompt = sprintf('%s, press Enter to roll the dice again...', players(i).name);
-               input(prompt, 's');
-                
-                roll = randi([2,14]);  % roll dice from 1 to 14
-                if ismember(roll, [10,12,13,14])
-                    roll = 10;
-                end
-                
-                fprintf('%s rolled a %d!\n', players(i).name, roll);
-               
-                  
-                    if roll == 11
-                      isValid = false;
-                      fprintf('%s, choose if you want your roll to be 1 or 11.\n', players(i).name)
-                       while isValid == false
-                            roll = input('Enter your choice (1 or 11): ');
-                            if ismember(roll, [1, 11])
-                              fprintf('Your roll is %d\n', roll)
-                              isValid = true;
-                            else
-                              fprintf('Please enter a valid number (1 or 11) ')
-                            end
-                       end
-                    end
-                players(i).rollAmount = players(i).rollAmount + roll;
-                
-                fprintf('%s, your new total sum is %d.\n', players(i).name, players(i).rollAmount);
-        elseif choiceOne == "N" || choiceOne == "NO"
-            players(i).scoreFinal = players(i).rollAmount;
-            players(i).doneBetting = 1;        
+        fprintf('%s rolled a %d!\n', players(i).name, roll);
+        players(i).rollAmount = players(i).rollAmount + roll;
 
+        % Check for bust
+        if players(i).rollAmount > 21
+            fprintf('%s busted with a total of %d!\n', players(i).name, players(i).rollAmount);
+            players(i).scoreFinal = 0;  % Optional: store final result
+            break;
         end
     end
 end
-    
-% --- Fith roll for players ---
-fprintf("Final Round.\n");
-pause(.5);
-for i = 1:num
-    if players(i).doneBetting == 0;
-        promptHit = sprintf('%s, your current total is %d, would you like to hit? Y/N.\n', players(i).name, players(i).rollAmount);
-        choiceOne = upper(input (promptHit, 's'));
-        validChoices = ["YES", "YE", "Y", "NO", "N"];
-        while ismember(choiceOne, validChoices) == 0
-            promptHit = sprintf('%s, your current total is %d, would you like to hit? Y/N.\n', players(i).name, players(i).rollAmount);
-            choiceOne = upper(input (promptHit, 's'));
-        end
-    
-        
-        if choiceOne == "Y" || choiceOne == "YE" || choiceOne == "YES"
-               prompt = sprintf('%s, press Enter to roll the dice again...', players(i).name);
-               input(prompt, 's');
-                
-                roll = randi([2,14]);  % roll dice from 1 to 14
-                if ismember(roll, [10,12,13,14])
-                    roll = 10;
-                end
-                
-                fprintf('%s rolled a %d!\n', players(i).name, roll);
-               
-                  
-                    if roll == 11
-                      isValid = false;
-                      fprintf('%s, choose if you want your roll to be 1 or 11.\n', players(i).name)
-                       while isValid == false
-                            roll = input('Enter your choice (1 or 11): ');
-                            if ismember(roll, [1, 11])
-                              fprintf('Your roll is %d\n', roll)
-                              isValid = true;
-                            else
-                              fprintf('Please enter a valid number (1 or 11) ')
-                            end
-                       end
-                    end
-                players(i).rollAmount = players(i).rollAmount + roll;
-                
-                fprintf('%s, your new total sum is %d.\n', players(i).name, players(i).rollAmount);
-        elseif choiceOne == "N" || choiceOne == "NO"
-            players(i).scoreFinal = players(i).rollAmount;
+
+while computer.rollAmount < 17
+    roll = randi([2,14]);
+    if ismember(roll, [10,12,13,14])
+        roll = 10;
+    elseif roll == 11
+        % Basic strategy for house: use 11 if it won’t cause a bust
+        if computer.rollAmount + 11 > 21
+            roll = 1;
+        else
+            roll = 11;
         end
     end
-end
     
-% --- Display house's roll ---
-    %if players roll is greater than house, they win. End of round one,
-    %start round n. 
+    computer.rollAmount = computer.rollAmount + roll;
+    fprintf('House rolled a %d. Total is now %d.\n', roll, computer.rollAmount);
+end
+
+% Final outcome
+if computer.rollAmount > 21
+    fprintf('House busted with a total of %d!\n', computer.rollAmount);
+else
+    fprintf('House stands with a total of %d.\n', computer.rollAmount);
+end
