@@ -7,7 +7,7 @@ READ_API_KEY = "";
 Dice = Dice();
 
 for i = 1:10
-    Dice.RollValue = Roll();
+    % Dice.RollValue = Roll();
 end
 
 disp("Hi")
