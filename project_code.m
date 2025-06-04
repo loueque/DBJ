@@ -20,7 +20,6 @@ for i = 1:num
 end
 
 players(1, length(playerNames)) = Player();
-
 for i = 1:length(playerNames)
     players(i) = Player(playerNames{i});
 end
