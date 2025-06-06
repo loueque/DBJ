@@ -16,9 +16,9 @@ classdef Dice < handle
         function die = Roll(die)
             die.Score = randi([2,14]);  % The houses First roll
             if ismember(die.Score, [10,12,13,14])
-                die.Score = 10;
+                die.Score = die.Score + 10;
             elseif die.Score == 11
-                die.Score = 11;
+                die.Score = die.Score + 11;
             end
         end
 

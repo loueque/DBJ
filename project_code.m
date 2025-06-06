@@ -49,7 +49,8 @@ for x = 1:2
             isValid = false;
             fprintf('%s, choose if you want your roll to be 1 or 11.\n', players(i).Name)
             while isValid == false
-                roll = input('Enter your choice (1 or 11): ');
+                choice = inputdlg(sprintf('%s, choose 1 or 11:', players(i).Name), 'Ace Choice', [1, 50]);
+                roll = str2double(choice{1});
                 if ismember(roll, [1, 11])
                     fprintf('Your roll is %d\n', roll)
                     isValid = true;
