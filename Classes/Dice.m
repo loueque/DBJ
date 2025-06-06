@@ -14,11 +14,18 @@ classdef Dice < handle
         end
 
         function die = Roll(die)
-            die.Score = randi([2,14]);  % The houses First roll
-            if ismember(die.Score, [10,12,13,14])
-                die.Score = die.Score + 10;
-            elseif die.Score == 11
-                die.Score = die.Score + 11;
+            chosenRoll = randi([2,14]);  % The houses First roll
+            if ismember(chosenRoll, [10,12,13,14])
+                die = die.UpdateScore(10);
+            elseif chosenRoll == 11
+                random = randi([1, 2]);
+                if ismember(random, [1])
+                    die = die.UpdateScore(1);
+                else
+                    die = die.UpdateScore(11);
+                end
+            else
+                die = die.UpdateScore(chosenRoll);
             end
         end
 
