@@ -99,7 +99,7 @@ while CheckPlayersDoneTurn(players) ~= true
             end
 
             fprintf('%s rolled a %d!\n', players(i).Name, roll);
-            players(i).UpdateScore(roll)
+            players(i).UpdateScore(roll);
 
             % Check for bust
             if players(i).Score > 21
