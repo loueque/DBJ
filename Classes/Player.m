@@ -27,6 +27,10 @@ classdef Player < handle
             player.Score = player.Score + f;
         end
 
+        function player = UpdatePoints(player)
+            player.Points = player.Points + 1;
+        end
+
         function player = FinishTheRoll(player)
             player.IsDoneRolling = true;
         end
